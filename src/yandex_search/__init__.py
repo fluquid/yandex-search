@@ -40,7 +40,7 @@ class YandexException(Exception):
     https://tech.yandex.ru/xml/doc/dg/reference/error-codes-docpage/
     """
     def __init__(self, code, message):
-        super().__init__(message)
+        super(Exception, self).__init__(message)
         self.code = code
 
 
