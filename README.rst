@@ -12,18 +12,22 @@ Yandex Search
     :alt: Coverage Status
     :target: https://codecov.io/github/fluquid/yandex-search
 
-Access to yandex.ru search engine for world-wide web searches.
+.. image:: https://requires.io/github/fluquid/yandex-search/requirements.svg?branch=master
+    :alt: Requirements Status
+    :target: https://requires.io/github/fluquid/yandex-search/requirements/?branch=master
 
-When signing up with yandex.ru with a validated (international) mobile number, it allows 10k searches per day!
+
+Search library for yandex.ru search engine.
+
+Yandex allows **10,000 searches per day** when registered with a validated (international) mobile number.
 
 Example
 -------
-
 ::
 
-    yandex = yandex_search.Yandex()
-    yandex.search('"Interactive Saudi"')
-    {"results": [{
+    >>> yandex = yandex_search.Yandex(api_user='asdf', api_key='asdf')
+    >>> yandex.search('"Interactive Saudi"')
+    {"items": [{
           "snippet": "Your Software Development Partner In  Saudi   Arabia . Since our early days in 2003, our main goal in  Interactive   Saudi   Arabia  has been: \"To earn customer respect and maintain long-term loyalty\".",
           "url": "http://www.interactive.sa/en",
           "title": "Interactive   Saudi   Arabia  Limited",
@@ -54,11 +58,14 @@ Alternatives
 Documentation
 -------------
 search operators:
+
 * https://yandex.com/support/search/how-to-search/search-operators.html
 
 settings:
+
 * https://xml.yandex.ru/settings.xml
 
 docs:
+
 * https://tech.yandex.ru/xml/doc/dg/concepts/restrictions-docpage/
 * https://yandex.com/support/search/robots/search-api.html
