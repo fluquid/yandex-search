@@ -42,6 +42,10 @@ class YandexException(Exception):
         super().__init__(message)
         self.code = code
 
+class YandexNoResultsException(YandexException):
+    """ error with the query/params passed """
+    pass
+
 class YandexQueryException(YandexException):
     """ error with the query/params passed """
     pass
@@ -96,8 +100,7 @@ class Yandex(object):
             message = ' '.join(error.xpath('.//text()'))
 
             if code == 15:
-                # no results
-                pass
+                raise YandexNoResultsException(code, message)
 
             elif code in (20, 31, 33, 34, 42, 43, 44, 48, 100):
                 raise YandexConfigException(code, message)
