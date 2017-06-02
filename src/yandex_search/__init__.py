@@ -5,7 +5,6 @@ python library to interact with yandex.ru search engine
 
 __author__ = 'Johannes Ahlmann'
 __email__ = 'johannes@fluquid.com'
-__version__ = '0.1.0-dev'
 
 import os
 import logging
@@ -13,6 +12,7 @@ import json
 
 import requests
 from lxml import etree
+
 
 class YandexResults(object):
     """
@@ -33,6 +33,7 @@ class YandexResults(object):
             'found': self.found,
             'items': '[items]'})
 
+
 class YandexException(Exception):
     """
     generic yandex error, please see below for specific error cases
@@ -42,20 +43,24 @@ class YandexException(Exception):
         super().__init__(message)
         self.code = code
 
-class YandexNoResultsException(YandexException):
+
+class NoResultsException(YandexException):
     """ error with the query/params passed """
     pass
 
-class YandexQueryException(YandexException):
+
+class QueryException(YandexException):
     """ error with the query/params passed """
     pass
 
-class YandexConfigException(YandexException):
+
+class ConfigException(YandexException):
     """ error with yandex configuration, needs to be addressed before
     any future requests """
     pass
 
-class YandexRateLimitException(YandexException):
+
+class RateLimitException(YandexException):
     """ rate limit was exceeded, need to wait """
     pass
 
@@ -85,7 +90,7 @@ class Yandex(object):
             'filter': 'none',
             'maxpassages': 5,
             'page': page,
-            'groupby': GROUPBY_DOMAIN if group_by_domain else GROUPBY_FLAT
+            'groupby': GROUPBY_DEEP if group_by_domain else GROUPBY_FLAT
         }
         res = requests.get(URL, params=params)
         xml = res.content
@@ -100,16 +105,16 @@ class Yandex(object):
             message = ' '.join(error.xpath('.//text()'))
 
             if code == 15:
-                raise YandexNoResultsException(code, message)
+                raise NoResultsException(code, message)
 
             elif code in (20, 31, 33, 34, 42, 43, 44, 48, 100):
-                raise YandexConfigException(code, message)
+                raise ConfigException(code, message)
 
             elif code in (32, 55):
-                raise YandexRateLimitException(code, message)
+                raise RateLimitException(code, message)
 
             elif code in (1, 2, 15, 18, 19, 37):
-                raise YandexQueryException(code, message)
+                raise QueryException(code, message)
 
             else:
                 raise Exception('unknown error code %d "%s"', code, message)
@@ -136,13 +141,13 @@ class Yandex(object):
         root = etree.XML(xml)
         self._raise_on_error(root)
 
-        request = root.xpath('./request')
-            # query, page, sortby, maxpassages, groupings
+        # request = root.xpath('./request')
+        # query, page, sortby, maxpassages, groupings
 
         date = root.xpath('./response/@date')[0]
         reqid = root.xpath('./response/reqid/text()')[0]
         founds = root.xpath('./response/found')
-        found = {f.xpath('./@priority')[0]:f.xpath('./text()')[0]
+        found = {f.xpath('./@priority')[0]: f.xpath('./text()')[0]
                  for f in founds}
         items = list(self._get_items(root))
         return YandexResults(date, reqid, found, items)
@@ -161,5 +166,3 @@ class Yandex(object):
                               page=page,
                               group_by_domain=group_by_domain)
         return self._parse_xml(xml)
-
-
