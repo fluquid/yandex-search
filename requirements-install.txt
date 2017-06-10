@@ -1,3 +1,4 @@
 # This packages are required to install and run our package.
 requests
 lxml
+six

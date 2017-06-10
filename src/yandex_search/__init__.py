@@ -12,6 +12,7 @@ import json
 
 import requests
 from lxml import etree
+import six
 
 
 class YandexResults(object):
@@ -96,12 +97,18 @@ class Yandex(object):
         xml = res.content
         return xml
 
-    def _raise_on_error(self, tree):
+    def _raise_on_error(self, tree, xml):
         """ analyze response for errors and raise appropriate exception """
         errors = tree.xpath('//error')
         if errors:
             error = errors[0]
-            code = int(error.attrib['code'])
+            try:
+                code = int(error.attrib['code'])
+            except (KeyError, ValueError) as e:
+                logging.exception(e)
+                raise Exception('unable to parse error code: ' +
+                                (xml if six.PY2 else xml.decode('utf-8')))
+
             message = ' '.join(error.xpath('.//text()'))
 
             if code == 15:
@@ -139,7 +146,7 @@ class Yandex(object):
     def _parse_xml(self, xml):
         """ parse information from xml into YandexResult object """
         root = etree.XML(xml)
-        self._raise_on_error(root)
+        self._raise_on_error(root, xml)
 
         # request = root.xpath('./request')
         # query, page, sortby, maxpassages, groupings
