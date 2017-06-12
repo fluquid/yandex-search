@@ -26,14 +26,13 @@ Example
 ::
 
     >>> yandex = yandex_search.Yandex(api_user='asdf', api_key='asdf')
-    >>> yandex.search('"Interactive Saudi"')
-    {"items": [{
+    >>> yandex.search('"Interactive Saudi"').items
+    [{
           "snippet": "Your Software Development Partner In  Saudi   Arabia . Since our early days in 2003, our main goal in  Interactive   Saudi   Arabia  has been: \"To earn customer respect and maintain long-term loyalty\".",
           "url": "http://www.interactive.sa/en",
           "title": "Interactive   Saudi   Arabia  Limited",
           "domain": "www.interactive.sa"
-        }]
-    }
+    }]
 
 Getting Started
 ---------------
@@ -43,8 +42,16 @@ Getting Started
 
 * configure yandex: https://xml.yandex.ru/settings.xml
 
-  * find "key" under "test"
-  * set IP to your querying machine
+  * switch language to english in bottom left (En/Ru)
+  * enter email for `Email notifications`
+  * set `Search type` to `Worldwide`
+  * set `Main IP-address` to your querying machine
+  * `I accept the terms of License Agreement`
+  * Save
+
+  * Navigate to `Test`
+    * `? user = ` is your credentials username
+    * `& key = ` is your crednetials key
 
 
 Notes
