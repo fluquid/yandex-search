@@ -49,9 +49,9 @@ Getting Started
   * "I accept the terms of License Agreement"
   * Save
 
-  * Navigate to `Test`
-    * `? user = ` is your credentials username
-    * `& key = ` is your crednetials key
+  * Navigate to "Test"
+    * "? user = " is your credentials username
+    * "& key = " is your crednetials key
 
 
 Notes
