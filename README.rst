@@ -39,6 +39,7 @@ Getting Started
 * register account: https://passport.yandex.ru/registration
 
   * use google translate addon (right-click "translate page")
+    * provide an (international) mobile phone number to unlock 10k queries/day
 
 * configure yandex: https://xml.yandex.ru/settings.xml
 
