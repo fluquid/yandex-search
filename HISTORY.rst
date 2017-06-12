@@ -7,9 +7,6 @@ History
 0.3.2 (2017-06-12)
 ------------------
 
-0.3.1 (2017-06-12)
-------------------
-
 * updated readme to include "accept terms of license agreement"
 
 0.3.0 (2017-06-11)

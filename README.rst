@@ -44,12 +44,12 @@ Getting Started
 
   * Navigate to "Settings"
 
-      * switch language to english in bottom left (En/Ru)
-      * enter email for "Email notifications"
-      * set "Search type" to "Worldwide"
-      * set "Main IP-address" to your querying machine
-      * "I accept the terms of License Agreement"
-      * Save
+    * switch language to english in bottom left (En/Ru)
+    * enter email for "Email notifications"
+    * set "Search type" to "Worldwide"
+    * set "Main IP-address" to your querying machine
+    * "I accept the terms of License Agreement"
+    * Save
 
   * Navigate to "Test"
 
