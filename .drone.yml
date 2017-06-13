@@ -1,0 +1,8 @@
+image: python
+
+script:
+  - pip install -r requirements-dev.txt
+  - make check
+  - make test
+  - make coverage
+  - tox
