@@ -16,6 +16,9 @@ Yandex Search
     :alt: Requirements Status
     :target: https://requires.io/github/fluquid/yandex-search/requirements/?branch=master
 
+.. image:: http://fluquid.com:8000/api/badge/github.com/fluquid/yandex-search/status.svg?branch=master
+    :alt: Build Status
+    :target: http://fluquid.com:8000/github.com/fluquid/yandex-search
 
 Search library for yandex.ru search engine.
 
